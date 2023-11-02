@@ -1,6 +1,7 @@
 import styles from "./Task.module.css";
 import { Trash } from "phosphor-react";
 import Clipboard from "../assets/Clipboard.png";
+
 interface Tasks {
   id: string;
   title: string;
@@ -9,9 +10,14 @@ interface Tasks {
 
 interface PostProps {
   task: Tasks;
+  onDeleteTask: (IdTaskToDelete: string) => void;
 }
 
-export function Task({ task }: PostProps) {
+export function Task({ task, onDeleteTask }: PostProps) {
+  function handleDeleteComment(e: any) {
+    onDeleteTask(task.id);
+  }
+
   return (
     <div className={styles.task}>
       {task.isComplete ? (
@@ -20,7 +26,7 @@ export function Task({ task }: PostProps) {
         <input type="checkbox" />
       )}
       <p>{task.title}</p>
-      <button title="Deletar task">
+      <button onClick={handleDeleteComment} title="Deletar task">
         <Trash size={24}></Trash>
       </button>
     </div>

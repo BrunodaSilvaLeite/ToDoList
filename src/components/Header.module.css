@@ -74,10 +74,15 @@ h1::after {
   cursor: pointer;
   transition: color 0.1s, background-color 0.1s;
 }
-.searchContainer button[type="submit"]:hover {
+
+.searchContainer button[type="submit"]:not(:disabled):hover {
   background: var(--blue-300);
 }
 
+.searchContainer button[type="submit"]:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
 @media (max-width: 768px) {
   .searchContainer input {
     width: 100%;
