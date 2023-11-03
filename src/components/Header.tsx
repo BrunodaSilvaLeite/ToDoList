@@ -4,27 +4,34 @@ import rocketLogo from "../assets/rocket.svg";
 import { useState, FormEvent, ChangeEvent, InvalidEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+interface Tasks {
+  id: string;
+  title: string;
+  isComplete: boolean;
+}
+interface PostProps {
+  setNewTaskTextChange: (taskText: string) => void;
+  NewTaskText: string;
+  onCreateTask: (task: Tasks) => void;
+}
+
 export function Header({
-  onNewTaskTextChange,
+  setNewTaskTextChange,
   NewTaskText,
-  setTasks,
-  task,
-}: any) {
+  onCreateTask,
+}: PostProps) {
   function handleNewTextChange(event: ChangeEvent<HTMLInputElement>) {
-    onNewTaskTextChange(event.target.value);
+    setNewTaskTextChange(event.target.value);
     event.target.setCustomValidity("");
   }
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault();
-    setTasks([
-      ...task,
-      {
-        id: uuidv4(),
-        title: NewTaskText,
-        isComplete: false,
-      },
-    ]);
-    onNewTaskTextChange("");
+    onCreateTask({
+      id: uuidv4(),
+      title: NewTaskText,
+      isComplete: false,
+    });
+    setNewTaskTextChange("");
   }
   const isNewTaskEmpty = NewTaskText.length === 0;
 

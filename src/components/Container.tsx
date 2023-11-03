@@ -9,35 +9,46 @@ interface Tasks {
   title: string;
   isComplete: boolean;
 }
+interface TaskProps {
+  tasks: Tasks[];
+}
 
-export function Container({ tasks }: any) {
-  const [task, setTasks] = useState(tasks);
+export function Container({ tasks }: TaskProps) {
+  const [task, setTasks] = useState<Tasks[]>(tasks);
   const [NewTaskText, setNewTaskText] = useState("");
 
   function onDeleteTask(IdTaskToDelete: String) {
-    const tasksWithoutDeletedOne = task.filter((task: any) => {
+    const tasksWithoutDeletedOne = task.filter((task: Tasks) => {
       return task.id !== IdTaskToDelete;
     });
     setTasks(tasksWithoutDeletedOne);
   }
-  function onCompletionTask(idToChange: String) {
-    const updatedTasks = tasks.map((tasks: any) =>
-      tasks.id === idToChange ? { ...tasks, isComplete: true } : tasks
-    );
-    console.log(updatedTasks);
+
+  function onTaskStatus(idToChange: String) {
+    const updatedTasks = task.map((tasks: Tasks) => {
+      if (tasks.id === idToChange) {
+        return { ...tasks, isComplete: !tasks.isComplete };
+      } else {
+        return tasks;
+      }
+    });
+    setTasks(updatedTasks);
   }
 
-  const completedTasks = task.reduce((count: number, task: any) => {
+  function onCreateTask(oneTask: Tasks) {
+    setTasks([...tasks, oneTask]);
+  }
+
+  const completedTasks = task.reduce((count: number, task: Tasks) => {
     return task.isComplete ? count + 1 : count;
   }, 0);
 
   return (
     <div>
       <Header
-        onNewTaskTextChange={setNewTaskText}
+        setNewTaskTextChange={setNewTaskText}
         NewTaskText={NewTaskText}
-        setTasks={setTasks}
-        task={task}
+        onCreateTask={onCreateTask}
       ></Header>
       <div className={styles.wrapper}>
         <div className={styles.conatinerTask}>
@@ -70,7 +81,7 @@ export function Container({ tasks }: any) {
                   key={task.id}
                   task={task}
                   onDeleteTask={onDeleteTask}
-                  onCompletionTask={onCompletionTask}
+                  onTaskStatus={onTaskStatus}
                 />
               );
             })
