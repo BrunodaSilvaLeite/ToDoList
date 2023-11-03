@@ -8,12 +8,17 @@ const tasks = [
   {
     id: uuidv4(),
     title: "terminar desafio",
-    isComplete: true,
+    isComplete: false,
   },
   {
     id: uuidv4(),
     title:
       "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
+    isComplete: false,
+  },
+  {
+    id: uuidv4(),
+    title: "Testar aplicativo.",
     isComplete: false,
   },
 ];

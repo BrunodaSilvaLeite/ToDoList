@@ -11,11 +11,16 @@ interface Tasks {
 interface PostProps {
   task: Tasks;
   onDeleteTask: (IdTaskToDelete: string) => void;
+  onCompletionTask: (taskCompleted: string) => void;
 }
 
-export function Task({ task, onDeleteTask }: PostProps) {
+export function Task({ task, onDeleteTask, onCompletionTask }: PostProps) {
   function handleDeleteComment(e: any) {
     onDeleteTask(task.id);
+  }
+
+  function handleCompletionTask(e: any) {
+    onCompletionTask(task.id);
   }
 
   return (
@@ -23,7 +28,7 @@ export function Task({ task, onDeleteTask }: PostProps) {
       {task.isComplete ? (
         <input type="checkbox" checked />
       ) : (
-        <input type="checkbox" />
+        <input type="checkbox" onClick={handleCompletionTask} />
       )}
       <p>{task.title}</p>
       <button onClick={handleDeleteComment} title="Deletar task">

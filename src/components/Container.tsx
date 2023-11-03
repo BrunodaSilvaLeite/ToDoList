@@ -4,16 +4,32 @@ import { Task } from "./Task";
 import { useState } from "react";
 import { Header } from "./Header";
 
+interface Tasks {
+  id: string;
+  title: string;
+  isComplete: boolean;
+}
+
 export function Container({ tasks }: any) {
   const [task, setTasks] = useState(tasks);
   const [NewTaskText, setNewTaskText] = useState("");
 
   function onDeleteTask(IdTaskToDelete: String) {
-    const commentsWithoutDeletedOne = task.filter((task: any) => {
+    const tasksWithoutDeletedOne = task.filter((task: any) => {
       return task.id !== IdTaskToDelete;
     });
-    setTasks(commentsWithoutDeletedOne);
+    setTasks(tasksWithoutDeletedOne);
   }
+  function onCompletionTask(idToChange: String) {
+    const updatedTasks = tasks.map((tasks: any) =>
+      tasks.id === idToChange ? { ...tasks, isComplete: true } : tasks
+    );
+    console.log(updatedTasks);
+  }
+
+  const completedTasks = task.reduce((count: number, task: any) => {
+    return task.isComplete ? count + 1 : count;
+  }, 0);
 
   return (
     <div>
@@ -28,10 +44,13 @@ export function Container({ tasks }: any) {
           <div className={styles.conatinerHeader}>
             <header>
               <strong>
-                Tarefas criadas <span>{tasks.length}</span>
+                Tarefas criadas <span>{task.length}</span>
               </strong>
               <strong>
-                Concluídas <span>1</span>
+                Concluídas
+                <span>
+                  {completedTasks} de {task.length}
+                </span>
               </strong>
             </header>
           </div>
@@ -47,7 +66,12 @@ export function Container({ tasks }: any) {
           ) : (
             task.map((task: any) => {
               return (
-                <Task key={task.id} task={task} onDeleteTask={onDeleteTask} />
+                <Task
+                  key={task.id}
+                  task={task}
+                  onDeleteTask={onDeleteTask}
+                  onCompletionTask={onCompletionTask}
+                />
               );
             })
           )}
