@@ -9,7 +9,8 @@
     <a href="#-How-to-Run">How to Run 🏃</a>&nbsp;&nbsp;&nbsp;
 </p>
 
-![projeto Todolist](https://github.com/BrunodaSilvaLeite/ToDoList/assets/72769991/a9f9e6cd-2b32-455f-92ae-5edf01d3639f)
+![projeto Todolist](https://github.com/BrunodaSilvaLeite/ToDoList/assets/72769991/6512c949-d7b9-49b4-b96b-3388d0ae5dfc)
+
 
 ## 🚀 Technologies
 
