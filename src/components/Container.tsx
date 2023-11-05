@@ -9,12 +9,9 @@ interface Tasks {
   title: string;
   isComplete: boolean;
 }
-interface TaskProps {
-  tasks: Tasks[];
-}
 
-export function Container({ tasks }: TaskProps) {
-  const [task, setTasks] = useState<Tasks[]>(tasks);
+export function Container() {
+  const [task, setTasks] = useState<Tasks[]>([]);
   const [NewTaskText, setNewTaskText] = useState("");
 
   function onDeleteTask(IdTaskToDelete: String) {
@@ -36,7 +33,7 @@ export function Container({ tasks }: TaskProps) {
   }
 
   function onCreateTask(oneTask: Tasks) {
-    setTasks([...tasks, oneTask]);
+    setTasks([...task, oneTask]);
   }
 
   const completedTasks = task.reduce((count: number, task: Tasks) => {

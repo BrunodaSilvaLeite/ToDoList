@@ -1,7 +1,7 @@
 import styles from "./Header.module.css";
 import { PlusCircle } from "phosphor-react";
 import rocketLogo from "../assets/rocket.svg";
-import { useState, FormEvent, ChangeEvent, InvalidEvent } from "react";
+import { FormEvent, ChangeEvent, InvalidEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 interface Tasks {
