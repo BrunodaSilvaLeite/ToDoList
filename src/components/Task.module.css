@@ -62,3 +62,9 @@ input[type="checkbox"] {
   display: flex;
   justify-content: center;
 }
+@media (max-width: 768px) {
+  .task {
+    width: 100%;
+    padding: 1rem;
+  }
+}
