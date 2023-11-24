@@ -1,4 +1,4 @@
-import styles from './Input.module.css'
+import styles from './input.module.css'
 
 export function Input({
   ...rest
